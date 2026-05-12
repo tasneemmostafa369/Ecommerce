@@ -26,7 +26,9 @@ export class CardComponent {
 
   ngOnInit(): void {
    if(isPlatformBrowser(this.pLATFORM_ID)){
-     this.loadWishlist();
+     if (localStorage.getItem('freshToken')){
+      this.loadWishlist();
+     }
    }
   }
 

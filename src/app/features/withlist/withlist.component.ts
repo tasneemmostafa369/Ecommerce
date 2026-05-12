@@ -16,8 +16,10 @@ export class WithlistComponent implements OnInit{
   wishlistDetails=signal<Wishlist[]>([])
 
   ngOnInit(): void {
-    if(isPlatformBrowser(this.pLATFORM_ID)){
-      this.getWishlistData()
+    if (isPlatformBrowser(this.pLATFORM_ID)) {
+      if (localStorage.getItem('freshToken')) {
+        this.getWishlistData();
+      }
     }
   }
   getWishlistData():void{
@@ -33,7 +35,8 @@ export class WithlistComponent implements OnInit{
     this.wishlistService.removeproductfromwishlist(id).subscribe({
       next:(res)=>{
         console.log(res);
-        this.getWishlistData()
+        // this.getWishlistData()
+        this.wishlistDetails.set(this.wishlistDetails().filter(item => item._id !== id));
         this.wishlistService.wishlistCount.set(res.data.length)
       }
     })
