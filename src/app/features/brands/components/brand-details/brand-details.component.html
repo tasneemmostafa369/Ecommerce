@@ -1,0 +1,76 @@
+<div class="min-h-screen bg-gray-50/50">
+  @if (brandDetails()) {
+  <div class="bg-gradient-to-br from-[#16a34a] via-[#22c55e] to-[#4ade80] text-white">
+    <div class=" px-4 py-10 sm:py-14">
+      <nav class="flex items-center gap-2 text-sm text-white/70 mb-6 flex-wrap">
+        <a class="hover:text-white transition-colors" routerLink="/" >Home</a>
+        <span class="text-white/40">/</span>
+        <a class="hover:text-white transition-colors" routerLink="/brands">Brands</a>
+        <span class="text-white/40">/</span>
+        <span class="text-white font-medium">{{ brandDetails().name }}</span>
+      </nav>
+
+      <div class="flex items-center gap-5">
+        <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl ring-1 ring-white/30">
+          <img [src]="brandDetails().image" [alt]="brandDetails().name" class="w-10 h-10 object-contain">
+        </div>
+        <div>
+          <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">{{ brandDetails().name }}</h1>
+          <p class="text-white/80 mt-1">Shop {{ brandDetails().name }} products</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-4 py-8">
+    <div class="mb-6 flex items-center gap-3 flex-wrap">
+      <span class="flex items-center gap-2 text-sm text-gray-600">
+        <i class="fa-solid fa-filter"></i> Active Filters:
+      </span>
+      <a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-100 text-violet-700 text-sm font-medium hover:bg-violet-200 transition-colors">
+        <i class="fa-solid fa-tags text-xs"></i> {{ brandDetails().name }}
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </a>
+      <a class="text-sm text-gray-500 hover:text-gray-700 underline" routerLink="/products">Clear all</a>
+      
+    </div>
+    <div class="text-sm text-gray-500 font-medium py-2">
+        Showing <span class="">{{ productList().length }}</span> products
+      </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+      @for (product of productList(); track product._id) {
+          <app-card [product]="product"></app-card>
+        }
+        @empty {
+            <div class="col-span-full py-2 text-center bg-white rounded-3xl  ">
+            <div class="w-20 h-20 rounded-full bg-gray-50 flex items-center justify-center mx-auto mb-5 border border-gray-100">
+                <i class="fa-solid fa-box-open text-4xl text-gray-300"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-gray-900 mb-2">No Products Found</h3>
+            <p class="text-gray-500 mb-8 max-w-xs mx-auto">
+                No products match your current filters.
+            </p>
+            
+            <a routerLink="/shop" 
+               class="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-emerald-700 transition-all shadow-md active:scale-95">
+                <i class="fa-solid fa-arrow-left text-sm"></i>
+                View All Products
+            </a>
+        </div>
+        }
+    </div>
+  </div>
+  } 
+  @else {
+    <div class="min-h-screen flex items-center justify-center">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-violet-600"></div>
+    </div>
+  }
+</div>
+
+
+
+
+

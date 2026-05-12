@@ -1,0 +1,40 @@
+
+    <div class="relative overflow-hidden bg-gradient-to-br from-primary via-[#22c55e] to-[#4ade80] text-white">
+  <div class="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-emerald-900/20 rounded-full blur-3xl"></div>
+
+  <div class=" px-4 py-10 sm:py-16 relative z-10">
+    <nav class="flex items-center gap-2 text-sm text-emerald-50 mb-8 flex-wrap">
+      <a  routerLink="/" class="cursor-pointer hover:text-white transition-colors flex items-center gap-1">
+        <i class="fa-solid fa-house text-xs"></i> Home
+      </a>
+      <span class="text-white/40">/</span>
+      <span class="text-white font-medium">All Products</span>
+    </nav>
+
+    <div class="flex flex-col sm:flex-row items-center gap-6">
+      <div class="w-20 h-20 rounded-3xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl ring-1 ring-white/40 transform hover:rotate-6 transition-transform duration-300">
+        <i class="fa-solid fa-box-open text-4xl text-white"></i>
+      </div>
+
+      <div class="text-center sm:text-left">
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-2">
+          All Products
+        </h1>
+        <p class="text-emerald-50/90 text-lg font-light max-w-md">
+          Explore our complete product collection.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class=" px-4 py-8">
+<div class="mb-6 text-sm text-gray-500">Showing {{productList().length}} products</div>
+
+<div class="mt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 ">
+            @for (product of productList(); track product._id) {
+                <app-card [product]="product"></app-card>
+            }
+        </div>
+</div>

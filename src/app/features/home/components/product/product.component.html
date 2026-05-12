@@ -1,0 +1,20 @@
+<section class="py-10">
+    <div class="container">
+        <div class="flex items-center gap-3">
+            <div class="h-8 w-1.5 bg-emerald-600 rounded-full bg-gradient-to-b from-emerald-400 to-emerald-700"></div>
+
+            <h2 class="text-3xl font-bold tracking-tight">
+                <span class="text-slate-900">Featured</span>
+                <span class="text-emerald-600 ml-2">Products</span>
+            </h2>
+        </div>
+
+        <!-- cart -->
+        <div class="mt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 ">
+            @for (product of productList(); track product._id) {
+                <app-card [product]="product"></app-card>
+            }
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,119 @@
+<div class="min-h-screen bg-[#f9fafb]">
+  <div class="bg-white border-b border-gray-100 shadow-sm">
+    <div class="px-4 py-10">
+      <nav class="flex items-center gap-2 text-sm text-gray-400 mb-4">
+        <a class="hover:text-primary transition-colors" routerLink="/">Home</a>
+        <span class="opacity-50">/</span>
+        <span class="text-gray-900 font-semibold">Wishlist</span>
+      </nav>
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-5">
+          <div class="w-14 h-14 rounded-2xl bg-red-50 flex items-center justify-center shadow-inner">
+            <i class="fa-solid fa-heart text-2xl text-red-500"></i>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">My Wishlist</h1>
+            <p class="text-gray-500 text-sm mt-1">{{wishlistDetails().length}} items saved</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class=" px-4 py-10">
+    <div class="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden">
+      
+      <div class="hidden md:grid grid-cols-12 gap-4 px-8 py-5 bg-gray-50/80 border-b border-gray-100 text-[13px] font-bold  tracking-wider text-gray-400">
+        <div class="col-span-6">Product </div>
+        <div class="col-span-2 text-center">Price</div>
+        <div class="col-span-2 text-center">Status</div>
+        <div class="col-span-2 text-center">Actions</div>
+      </div>
+
+      <div class="divide-y divide-gray-100">
+       
+            @for (item of wishlistDetails(); track item._id) {
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 md:px-8 md:py-6 items-center hover:bg-violet-50/30 transition-all group">
+          
+          <div class="md:col-span-6 flex items-center gap-5">
+            <div class="w-24 h-24 rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden shrink-0 p-2 group-hover:scale-105 transition-transform duration-300">
+              <img [src]="item.imageCover" 
+                   [alt]="item.title" 
+                   class="w-full h-full object-contain">
+            </div>
+            <div class="min-w-0">
+              <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Women's Fashion</span>
+              <h3 class="font-bold text-gray-900 text-lg hover:text-primary transition-colors line-clamp-1 cursor-pointer">
+                {{ item.title.split(' ').slice(0, 2).join(' ') }}
+              </h3>
+            </div>
+          </div>
+
+          <div class="md:col-span-2 flex md:flex-col md:justify-center items-center gap-2">
+            <span class="md:hidden text-sm font-medium text-gray-400">Price:</span>
+            <div class="font-bold text-xl text-gray-900">{{item.price}} <span class="text-sm font-normal text-gray-500">EGP</span></div>
+          </div>
+
+          <div class="md:col-span-2 flex md:justify-center items-center">
+            <span class="md:hidden text-sm font-medium text-gray-400 mr-2">Status:</span>
+            @if (item.quantity>0) {
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">
+              <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              In Stock
+            </span>
+            }
+            @else {
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700">
+              <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+              Out Stock
+            </span>
+            }
+          </div>
+
+          <div class="md:col-span-2 flex items-center gap-3 md:justify-center">
+            <button class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all bg-primary text-white hover:bg-[#15803d] hover:shadow-lg hover:shadow-violet-200 active:scale-95">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>Add to Cart</span>
+            </button>
+            <button (click)="removeItem(item._id)" class="cursor-pointer w-11 h-11 rounded-xl border border-gray-200 flex items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-100 hover:bg-red-50 transition-all group" title="Remove">
+              <i class="fa-solid fa-trash-can group-hover:shake"></i>
+            </button>
+          </div>
+
+        </div>
+            }
+            @empty {
+                <div class="container mx-auto px-4 py-20">
+            <div class="max-w-sm mx-auto text-center">
+              <div class="w-20 h-20 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-6">
+                <i class="fa-regular fa-heart text-3xl text-gray-400"></i>
+              </div>
+              <h2 class="text-xl font-bold text-gray-900 mb-2">Your wishlist is empty</h2>
+              <p class="text-gray-500 text-sm mb-6">
+                Browse products and save your favorites here. Sign in to sync your wishlist across devices.
+              </p>
+              <div class="flex flex-col gap-3">
+                <a routerLink="/shop" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:bg-[#15803d] transition-colors">
+                  Browse Products
+                  <i class="fa-solid fa-arrow-right text-sm"></i>
+                </a>
+                <a  routerLink="/login" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 transition-colors">
+                  Sign In
+                </a>
+              </div>
+            </div>
+          </div>
+            }
+        
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <a routerLink="/shop" class="inline-flex items-center gap-2 text-gray-500 hover:text-primary font-semibold transition-all group">
+        <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+        Continue Shopping
+      </a>
+    </div>
+  </div>
+</div>
