@@ -1,10 +1,11 @@
 import { Component, inject, PLATFORM_ID, signal } from '@angular/core';
 import { CartService } from '../../core/services/cart.service';
 import { CurrencyPipe, DatePipe, isPlatformBrowser, NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
-  imports: [NgClass,DatePipe,CurrencyPipe],
+  imports: [NgClass,DatePipe,CurrencyPipe,RouterLink],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
