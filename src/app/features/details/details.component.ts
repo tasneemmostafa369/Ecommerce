@@ -30,7 +30,9 @@ export class DetailsComponent implements OnInit{
     })
 
     if(isPlatformBrowser(this.pLATFORM_ID)){
-     this.loadWishlist();
+     if (localStorage.getItem('freshToken')){
+      this.loadWishlist();
+     }
    }
   }
 
